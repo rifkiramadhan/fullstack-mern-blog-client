@@ -6,3 +6,9 @@
 - yarn add react-router-dom
 - yarn add @reduxjs/toolkit react-redux
 - yarn add axios
+- yarn add @headlessui/react
+- yarn add @heroicons/react
+
+# Documentations
+
+- [Heroicons](https://heroicons.com)

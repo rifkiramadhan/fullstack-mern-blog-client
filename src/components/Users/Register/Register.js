@@ -45,7 +45,7 @@ const Register = () => {
   const storeData = useSelector((store) => store?.users);
   const { loading, appErr, serverErr, registered } = storeData;
 
-  // Redirect
+  // Redirect / Navigate
   if (registered) {
     return navigate('/profile');
   }

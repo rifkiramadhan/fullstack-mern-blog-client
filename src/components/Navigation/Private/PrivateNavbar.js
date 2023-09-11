@@ -9,6 +9,8 @@ import {
   BookOpenIcon,
 } from '@heroicons/react/outline';
 import { PlusIcon, LogoutIcon } from '@heroicons/react/solid';
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../../../redux/slices/users/usersSlices';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -26,6 +28,9 @@ const PrivateNavbar = ({ isLogin }) => {
     { name: 'Your Profile', href: `/profile` },
     { name: 'Change your password', href: '/update-password' },
   ];
+
+  // Logout
+  const dispatch = useDispatch();
 
   return (
     <Disclosure as='nav' className='bg-gray-800'>
@@ -81,6 +86,7 @@ const PrivateNavbar = ({ isLogin }) => {
                   </Link>
 
                   <button
+                    onClick={() => dispatch(logoutAction())}
                     type='button'
                     className='relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500'
                   >

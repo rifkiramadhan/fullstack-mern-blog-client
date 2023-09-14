@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-
 import { PencilAltIcon } from '@heroicons/react/outline';
 import { fetchCategoriesAction } from '../../redux/slices/categories/categoriesSlice';
+import DateFormatter from '../../utils/DateFormatter';
+import LoadingComponent from '../../utils/LoadingComponent';
 
 const CategoryList = () => {
   const dispatch = useDispatch();
@@ -18,11 +19,9 @@ const CategoryList = () => {
   return (
     <>
       {loading ? (
-        <h2 className='text-center text-3xl text-green-800'>Loading</h2>
+        <LoadingComponent />
       ) : appErr || serverErr ? (
-        <h2 className='text-center text-3xl text-red-600'>
-          {serverErr} {serverErr}
-        </h2>
+        <h2 className='text-center text-3xl text-red-600'>{serverErr}</h2>
       ) : categoryList?.length <= 0 ? (
         <h2 className='text-center text-3xl text-green-800'>
           No category Found
@@ -88,9 +87,9 @@ const CategoryList = () => {
                           {category.title}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                          {new Date(category?.createdAt).toDateString('id-ID')}
+                          {<DateFormatter date={category?.createdAt} />}
                         </td>
-                        <Link>
+                        <Link to={`/update-category/${category?._id}`}>
                           <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                             <PencilAltIcon className='h-5 text-indigo-500' />
                           </td>

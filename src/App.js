@@ -6,6 +6,7 @@ import {
   Login,
   Navbar,
   Register,
+  UpdateCategory,
 } from './components';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/add-category' element={<AddNewCategory />} />
         <Route path='/category-list' element={<CategoryList />} />
+        <Route path='/update-category/:id' element={<UpdateCategory />} />
       </Routes>
     </BrowserRouter>
   );

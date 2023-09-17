@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategoryAction } from '../../redux/slices/categories/categoriesSlice';
+import { useNavigate } from 'react-router-dom';
 
 //Form Schema
 const formSchema = Yup.object({
@@ -12,6 +13,9 @@ const formSchema = Yup.object({
 const AddNewCategory = () => {
   // Dispatch
   const dispatch = useDispatch();
+
+  // useNavigate
+  const navigate = useNavigate();
 
   // Formik
   const formik = useFormik({
@@ -27,7 +31,12 @@ const AddNewCategory = () => {
 
   // Get Data From Store
   const state = useSelector((state) => state?.category);
-  const { loading, appErr, serverErr, category } = state;
+  const { loading, appErr, serverErr, isCreated } = state;
+
+  // Redirect / Navigate
+  if (isCreated) {
+    return navigate('/category-list');
+  }
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>

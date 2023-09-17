@@ -8,7 +8,7 @@ import {
   updateCategoriesAction,
   deleteCategoriesAction,
 } from '../../redux/slices/categories/categoriesSlice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 //Form Schema
 const formSchema = Yup.object({
@@ -18,10 +18,13 @@ const formSchema = Yup.object({
 const UpdateCategory = () => {
   // Use Params
   const { id } = useParams();
-  console.log(id);
+  console.log('Id: ' + id);
 
   // Dispatch
   const dispatch = useDispatch();
+
+  // Navigate
+  const navigate = useNavigate();
 
   // Fetch Single Category
   useEffect(() => {
@@ -30,7 +33,7 @@ const UpdateCategory = () => {
 
   // Get Data From Store
   const state = useSelector((state) => state?.category);
-  const { loading, appErr, serverErr, category } = state;
+  const { loading, appErr, serverErr, category, isEdited, isDeleted } = state;
 
   // Formik
   const formik = useFormik({
@@ -46,6 +49,11 @@ const UpdateCategory = () => {
     },
     validationSchema: formSchema,
   });
+
+  // Redirect / Navigate
+  if (isEdited || isDeleted) {
+    return navigate('/category-list');
+  }
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
